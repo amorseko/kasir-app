@@ -28,7 +28,8 @@ function getNama() {
             id: $("#barcode").val()
         },
         success: res => {
-            $("#nama_produk").html(res.nama_produk);
+			$("#nama_produk").html(res.nama_produk);
+			$("#harga_satuan").val(res.harga);
             $("#sisa").html(`Sisa ${res.stok}`);
             checkEmpty()
         },
@@ -51,10 +52,18 @@ function checkStok() {
                 nama_produk = res.nama_produk,
                 jumlah = parseInt($("#jumlah").val()),
                 stok = parseInt(res.stok),
-                harga = parseInt(res.harga),
+				//harga = parseInt(res.harga),
+				harga = parseInt($("#harga_satuan").val()),
                 dataBarcode = res.barcode,
-                total = parseInt($("#total").html());
-            if (stok < jumlah) Swal.fire("Gagal", "Stok Tidak Cukup", "warning");
+				total = parseInt($("#total").html());
+				
+			if(harga == "" || isNaN(harga))
+			{
+				Swal.fire("Gagal", "Stok Tidak Cukup", "warning");
+			}
+
+			if (stok < jumlah) Swal.fire("Gagal", "Stok Tidak Cukup", "warning");
+			else if(harga == "" || isNaN(harga)) Swal.fire("Gagal", "Harga satuan kosong", "warning");
             else {
                 let a = transaksi.rows().indexes().filter((a, t) => dataBarcode === transaksi.row(a).data()[0]);
                 if (a.length > 0) {
@@ -173,8 +182,12 @@ function add() {
 function kembalian() {
     let total = $("#total").html(),
         jumlah_uang = $('[name="jumlah_uang"').val(),
-        diskon = $('[name="diskon"]').val();
-    $(".kembalian").html(jumlah_uang - total - diskon);
+		diskon = $('[name="diskon"]').val();
+		totalsementara = jumlah_uang - total;
+		totaldiskon = totalsementara - diskon;
+		totalfix = totaldiskon;
+	$(".kembalian").html(totalfix);
+    // $(".kembalian").html(jumlah_uang - total - diskon);
     checkUang()
 }
 $("#barcode").select2({

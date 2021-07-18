@@ -125,6 +125,7 @@
   var getProdukUrl = '<?php echo site_url('produk/get_produk') ?>';
   var kategoriSearchUrl = '<?php echo site_url('kategori_produk/search') ?>';
   var satuanSearchUrl = '<?php echo site_url('satuan_produk/search') ?>';
+	var urlBarcode = '<?php echo site_url('barcode/barcode') ?>';
 </script>
 <script src="<?php echo base_url('assets/js/produk.min.js') ?>"></script>
 </body>

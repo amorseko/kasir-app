@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Transaksi_model extends CI_Model {
 
 	private $table = 'transaksi';
+	private $id = 'transaksi.tanggal';
 
 	public function removeStok($id, $stok)
 	{
@@ -24,11 +25,31 @@ class Transaksi_model extends CI_Model {
 		return $this->db->insert($this->table, $data);
 	}
 
-	public function read()
+	private function convertDate($data)
 	{
+		// if($format == "Y-m-d")
+		// {
+			$spliter = explode("-",$data);
+
+			return $spliter[2]."-".$spliter[0]."-".$spliter[1];
+		// }
+	}
+
+	public function read($tgl_from,$tgl_to)
+	{
+		
 		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pelanggan.nama as pelanggan');
 		$this->db->from($this->table);
 		$this->db->join('pelanggan', 'transaksi.pelanggan = pelanggan.id', 'left outer');
+		if($tgl_from !="" && $tgl_to != "")
+		{
+			//convert date
+			$this->db->where('DATE(transaksi.tanggal) BETWEEN "'. $this->convertDate($tgl_from). '" and "'. $this->convertDate($tgl_to).'"');
+		}
+		$this->db->order_by('transaksi.tanggal','DESC');
+		// var_dump($this->db->get());
+		// var_dump($this->db->get_compiled_select());
+		// echo date('Y-m-d', strtotime($tgl_from));
 		return $this->db->get();
 	}
 
@@ -44,9 +65,12 @@ class Transaksi_model extends CI_Model {
 		foreach ($barcode as $key => $value) {
 			$this->db->select('nama_produk');
 			$this->db->where('id', $value);
+			$q = $this->db->get('produk');
+			$data = $q->result_array();
+			// $data[] = '<tr><td>'.$data[$key]['nama_produk'].' ('.$total[$key].')</td></tr>';
 			$data[] = '<tr><td>'.$this->db->get('produk')->row()->nama_produk.' ('.$total[$key].')</td></tr>';
 		}
-		return join($data);
+		// return join($data);
 	}
 
 

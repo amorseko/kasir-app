@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
+	<!-- <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/daterangepicker/daterangepicker.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>">
   <?php $this->load->view('partials/head'); ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -31,11 +34,34 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+		
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="card">
+					<div class="card-header">
+						<div class="form-row">
+							<div class="col-lg-12">
+									<div class="col-xs-3">
+										<div class="form-group">
+											<label>From</label>
+											<input type="text" class="form-control" name="from" id="tgl_from">
+										</div>
+									</div>
+									<div class="col-xs-3">
+										<div class="form-group">
+											<label>To</label>
+											<input type="text" class="form-control" name="to" id="tgl_to">
+										</div>
+									</div>
+									<div class="col-xs-3">
+										<!-- <div class="form-group"> -->
+											<button id="search" class="btn btn-success" onclick="cari()">Cari</button>
+										<!-- </div> -->
+									</div>
+							</div>
+						</div>
+          </div>
           <div class="card-body">
             <table class="table w-100 table-bordered table-hover" id="laporan_penjualan">
               <thead>
@@ -66,10 +92,16 @@
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+  <!-- daterange picker -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"> -->
+  <!-- bootstrap datepicker -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">  -->
+<script src="<?php echo base_url('assets/vendor/adminlte/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendor/adminlte/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
 <script>
   var readUrl = '<?php echo site_url('transaksi/read') ?>';
   var deleteUrl = '<?php echo site_url('transaksi/delete') ?>';
 </script>
-<script src="<?php echo base_url('assets/js/laporan_penjualan.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/unminify/laporan_penjualan.js') ?>"></script>
 </body>
 </html>

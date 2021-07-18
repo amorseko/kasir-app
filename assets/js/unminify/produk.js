@@ -50,24 +50,44 @@ function remove(id) {
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        $.ajax({
-            url: deleteUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
-            success: () => {
-                Swal.fire("Sukses", "Sukses Menghapus Data", "success");
-                reloadTable();
-            },
-            error: () => {
-                console.log(a);
-            }
-        })
+    }).then((result) => {
+		if(result.dismiss != 'cancel'){
+			$.ajax({
+				url: deleteUrl,
+				type: "post",
+				dataType: "json",
+				data: {
+					id: id
+				},
+				success: () => {
+					Swal.fire("Sukses", "Sukses Menghapus Data", "success");
+					reloadTable();
+				},
+				error: () => {
+					console.log(a);
+				}
+			})
+		}
+        
     })
 }
+
+function cetak_barcode(id)
+{
+
+	var urlBarcodefix = urlBarcode + "?qty=10&barcode="+id;
+	window.open(urlBarcodefix);
+
+}
+
+function isInt(value) {
+	if (isNaN(value)) {
+		return false;
+	}
+	var x = parseFloat(value);
+	return (x | 0) === x;
+}
+
 
 function editData() {
     $.ajax({

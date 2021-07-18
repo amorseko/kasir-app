@@ -50,7 +50,7 @@ class Produk_model extends CI_Model {
 
 	public function getNama($id)
 	{
-		$this->db->select('nama_produk, stok');
+		$this->db->select('nama_produk, stok, harga');
 		$this->db->where('id', $id);
 		return $this->db->get($this->table)->row();
 	}

@@ -29,7 +29,7 @@ class Produk extends CI_Controller {
 					'satuan' => $produk->satuan,
 					'harga' => $produk->harga,
 					'stok' => $produk->stok,
-					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$produk->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$produk->id.')">Delete</button>'
+					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$produk->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$produk->id.')">Delete</button> <button class="btn btn-sm btn-info" onclick="cetak_barcode(\'' . $produk->barcode . '\')">Cetak Barcode</button>'
 				);
 			}
 		} else {

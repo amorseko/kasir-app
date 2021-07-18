@@ -57,6 +57,10 @@
                 <span class="ml-3 text-muted" id="nama_produk"></span>
               </div>
               <small class="form-text text-muted" id="sisa"></small>
+						</div>
+						<div class="form-group">
+              <label>Harga Satuan</label>
+              <input type="number" class="form-control col-sm-6" placeholder="Harga Satuan" id="harga_satuan">
             </div>
             <div class="form-group">
               <label>Jumlah</label>

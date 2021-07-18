@@ -52,22 +52,24 @@ function remove(id) {
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        $.ajax({
-            url: deleteUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
-            success: a => {
-                Swal.fire("Sukses", "Sukses Menghapus Data", "success");
-                reloadTable()
-            },
-            error: a => {
-                console.log(a)
-            }
-        })
+    }).then((result) => {
+		if(result.dismiss != 'cancel'){
+			$.ajax({
+				url: deleteUrl,
+				type: "post",
+				dataType: "json",
+				data: {
+					id: id
+				},
+				success: a => {
+					Swal.fire("Sukses", "Sukses Menghapus Data", "success");
+					reloadTable()
+				},
+				error: a => {
+					console.log(a)
+				}
+			})
+		}
     })
 }
 

@@ -17,11 +17,13 @@ class Transaksi extends CI_Controller {
 		$this->load->view('transaksi');
 	}
 
-	public function read()
+	public function read($tgl_from = "", $tgl_to = "")
 	{
+	
 		// header('Content-type: application/json');
-		if ($this->transaksi_model->read()->num_rows() > 0) {
-			foreach ($this->transaksi_model->read()->result() as $transaksi) {
+		// echo $this->transaksi_model->read($tgl_from,$tgl_to)->num_rows();
+		if ($this->transaksi_model->read($tgl_from,$tgl_to)->num_rows() > 0) {
+			foreach ($this->transaksi_model->read($tgl_from,$tgl_to)->result() as $transaksi) {
 				$barcode = explode(',', $transaksi->barcode);
 				$tanggal = new DateTime($transaksi->tanggal);
 				$data[] = array(
@@ -37,6 +39,8 @@ class Transaksi extends CI_Controller {
 		} else {
 			$data = array();
 		}
+		
+		// print_r($this->db->last_query());    
 		$transaksi = array(
 			'data' => $data
 		);
