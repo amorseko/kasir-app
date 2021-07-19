@@ -184,8 +184,12 @@ function kembalian() {
         jumlah_uang = $('[name="jumlah_uang"').val(),
 		diskon = $('[name="diskon"]').val();
 		totalsementara = jumlah_uang - total;
-		totaldiskon = totalsementara - diskon;
+		totaldiskon = totalsementara + Number(diskon);
 		totalfix = totaldiskon;
+		//condition if diskon not empty
+		total_bayar = Number(total) - Number(diskon);
+		console.log(total_bayar);
+	$(".total_bayar").html(total_bayar);
 	$(".kembalian").html(totalfix);
     // $(".kembalian").html(jumlah_uang - total - diskon);
     checkUang()
